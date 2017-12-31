@@ -16,7 +16,7 @@
                 </div>
                 <div class="form-group">
                     <label>File</label>
-                    <input type="file" name="file" class="form-control-file">
+                    <input type="file" name="content" class="form-control-file">
                 </div>
                 <button type="submit" class="btn btn-primary">Add</button>
             </form>

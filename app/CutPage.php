@@ -13,7 +13,7 @@ class CutPage {
     private $url;     
     private $cut_tag = ["</table>", "</div>", "</p>", "<br/>", "”。", "。", ".", "！", "……", "？", ","];
      
-    function __construct($pagestr, $payload = 2000, $custom_tag = '')
+    function __construct($pagestr, $payload = 5000, $custom_tag = '')
     {     
         $this->pagestr = $pagestr;
         $this->payload = $payload;     
@@ -42,7 +42,7 @@ class CutPage {
         }
 
         $str_first = substr($this->pagestr, 0, $this->payload);   
-
+        
         foreach ($this->cut_tag as $v) {     
             if ($cut_start = strrpos($str_first, $v)) {     //逆向查找第一个分页符的位置
                 $page_arr[] = substr($this->pagestr, 0, $cut_start).$v;     

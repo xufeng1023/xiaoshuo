@@ -14,9 +14,15 @@ class PostController extends Controller
 
 	public function index()
 	{
-		$posts = Post::all();
+		$posts = Post::paginate(10);
 		return view('posts', compact('posts'));
 	}
+
+    public function show(Post $post)
+    {
+        dd($post->id);
+        return view('post', $post->paginate(1));
+    }
 
     public function new()
     {
@@ -37,23 +43,18 @@ class PostController extends Controller
 
     public function upload(Request $request)
     {
-        $ipage = $request->ipage ?: 1;
-        $content = file_get_contents($_FILES['file']['tmp_name']);
-        $cp = new \App\CutPage($content);
-        $page = $cp->cut_str();
-        echo $page[$ipage - 1];
-        echo $cp->pagenav();
-   //  	$bytesToRead = '1000';
-   //  	$stream = fopen($_FILES['file']['tmp_name'], 'r');
-   //  	while(!feof($stream)) {
-   //  		$data = fread($stream, $bytesToRead);
-   //  		Post::create([
-   //  			'title' => $request->title,
-   //  			'author' => $request->author,
-   //  			'content' => $data
-			// ]);
-   //  	}
-   //  	fclose($stream);
-   //  	return back();
+        $episodes = (new \App\CutPage(
+            file_get_contents($request->content)
+        ))->cut_str();
+
+    	foreach($episodes as $episode) {
+    		Post::create([
+    			'title' => $request->title,
+    			'author' => $request->author,
+    			'content' => $episode
+			]);
+    	}
+
+    	return back();
     }
 }

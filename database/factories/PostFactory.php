@@ -6,6 +6,6 @@ $factory->define(App\Post::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,
         'author' => $faker->name,
-        'content' => $faker->text
+        'content' => storage_path('app\public\utf8.txt')
     ];
 });

@@ -36,8 +36,13 @@ class ExampleTest extends TestCase
     public function test_auth_can_post()
     {
     	$this->auth();
-    	$post = $this->article('raw');
-    	$this->post('/upload', $post);
-    	$this->assertDatabaseHas('posts', $post);
+    	$this->post('/upload', $post = $this->article('raw'));
+    	$this->assertDatabaseHas('posts', ['title' => $post['title']]);
+    }
+
+    public function test_guests_can_read_a_post()
+    {
+        $post = $this->article();
+        $this->get("/post/$post->title")->assertSee($post->title);
     }
 }
