@@ -58,7 +58,10 @@ class ExampleTest extends TestCase
     {
         $content1 = $this->content(['content' => 'hello123']);
         $content2 = $this->content(['content' => 'hello456']);
+        
         $this->get("/search?q=hello")
             ->assertSee($content1->post->title)->assertSee($content2->post->title);
+        $this->get("/search?q=456")
+            ->assertDontSee($content1->post->title)->assertSee($content2->post->title);
     }
 }

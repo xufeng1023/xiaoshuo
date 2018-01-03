@@ -15,15 +15,12 @@ class Content extends Model
 		return $this->belongsTo(Post::class);
 	}
 
-	public function searchedText($text, $limit = 100)
+	public function searchedText($text)
 	{
-		$before = str_limit(
-			trim(str_before($this->content, $text))
-		, $limit);
+		$strArrays = explode($text, $this->content);
 
-		$after = str_limit(
-			trim(str_after($this->content, $text))
-		, $limit);
+		$before = substr(trim($strArrays[0]), -150);
+		$after = substr(trim($strArrays[1]), 0, 150);
 
 		return $before.'<span class="text-danger font-weight-bold">'.$text.'</span>'.$after;
 	}
