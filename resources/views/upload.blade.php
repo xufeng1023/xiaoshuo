@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-6">
+        <div class="col-8">
             <form action="/upload" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-group">
@@ -17,6 +17,9 @@
                 <div class="form-group">
                     <label>File</label>
                     <input type="file" name="content" class="form-control-file">
+                    @if(session()->has('file'))
+                        <div class="text-danger">{{ session('file') }}</div>
+                    @endif
                 </div>
                 <button type="submit" class="btn btn-primary">Add</button>
             </form>

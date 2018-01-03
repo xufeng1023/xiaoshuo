@@ -12,4 +12,9 @@ class Post extends Model
     {
     	return 'title';
     }
+
+    public function contents()
+    {
+    	return $this->hasMany(Content::class);
+    }
 }

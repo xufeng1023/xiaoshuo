@@ -6,3 +6,9 @@
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
+
+@media (min-width: 48em) {
+	.container {
+	    max-width: 46rem;
+	}
+}

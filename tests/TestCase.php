@@ -15,10 +15,13 @@ abstract class TestCase extends BaseTestCase
     	);
     }
 
-    public function article($action = 'create')
+    public function article($data = [], $action = 'create')
     {
     	return factory(\App\Post::class)->{$action}();
     }
 
-
+    public function content($data = [], $action = 'create')
+    {
+        return factory(\App\Content::class)->{$action}($data);
+    }
 }

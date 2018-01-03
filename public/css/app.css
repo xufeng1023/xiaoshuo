@@ -9717,3 +9717,9 @@ a.text-dark:hover {
   visibility: hidden !important;
 }
 
+@media (min-width: 48em) {
+  .container {
+    max-width: 46rem;
+  }
+}
+
