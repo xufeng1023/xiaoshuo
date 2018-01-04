@@ -20,6 +20,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        $post->increment('views');
         $contents = $post->contents()->paginate(1);
         return view('post', compact('post', 'contents'));
     }
@@ -35,14 +36,14 @@ class PostController extends Controller
             return back()->with('file', 'no file uploaded!');
         }
 
+        $episodes = (new \App\CutPage(
+            file_get_contents($request->content)
+        ))->cut_str();
+
         $post = Post::create([
             'title' => $request->title,
             'author' => $request->author,
         ]);
-
-        $episodes = (new \App\CutPage(
-            file_get_contents($request->content)
-        ))->cut_str();
 
     	foreach($episodes as $episode) {
     		$post->contents()->create([
@@ -55,7 +56,16 @@ class PostController extends Controller
 
     public function search(Request $request)
     {
-        $contents = Content::where('content', 'LIKE', "%$request->q%")->paginate(15);
+        $keywords = explode(' ', $request->q);
+
+        $query = Content::where('content', 'LIKE', "%$request->q%");
+        
+        foreach($keywords as $w) {
+            $query = $query->orWhere('content', 'LIKE', "%$w%");
+        }
+        
+        $contents = $query->paginate(15);
+        
         $contents->load('post');
         return view('search', compact('contents'));
     }

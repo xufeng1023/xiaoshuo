@@ -15,13 +15,25 @@ class Content extends Model
 		return $this->belongsTo(Post::class);
 	}
 
-	public function searchedText($text)
+	public function searchedText($text, $return = '')
 	{
-		$strArrays = explode($text, $this->content);
+		$keywords = explode(' ', $text);
+		
+		foreach($keywords as $w) {
+			$strArrays = explode($w, $this->content);
+			if(count($strArrays) <= 1) continue;
+			
+			$before = mb_substr(trim($strArrays[0]), -100);			
+			$after = mb_substr(trim($strArrays[1]), 0, 100);
 
-		$before = substr(trim($strArrays[0]), -150);
-		$after = substr(trim($strArrays[1]), 0, 150);
+			$return = $before.$w.$after;
+		}
 
-		return $before.'<span class="text-danger font-weight-bold">'.$text.'</span>'.$after;
+		foreach($keywords as $w) {
+			$highlighted = '<span class="text-danger font-weight-bold">'.$w.'</span>';
+			$return = str_replace($w, $highlighted, $return);
+		}
+		
+		return 	$return;	
 	}
 }

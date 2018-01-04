@@ -39,8 +39,10 @@ class ExampleTest extends TestCase
     {
         Storage::fake();
     	$this->auth();
+
         $post = $this->article([], 'raw');
         $post['content'] = UploadedFile::fake()->create('text.txt', 100);
+
     	$this->post('/upload', $post);
     	$this->assertDatabaseHas('posts', ['title' => $post['title']]);
         $this->assertDatabaseHas('contents', ['post_id' => 1]);
@@ -49,6 +51,7 @@ class ExampleTest extends TestCase
     public function test_guests_can_read_a_post()
     {
         $content = $this->content(['content' => 'hello123']);
+
         $this->get("/post/{$content->post->title}")
             ->assertSee($content->post->title)
             ->assertSee('hello123');
@@ -61,7 +64,19 @@ class ExampleTest extends TestCase
         
         $this->get("/search?q=hello")
             ->assertSee($content1->post->title)->assertSee($content2->post->title);
+
         $this->get("/search?q=456")
             ->assertDontSee($content1->post->title)->assertSee($content2->post->title);
+    }
+
+    public function test_reading_posts_adds_views()
+    {
+        $content = $this->content(['content' => 'hello123']);
+
+        $this->assertDatabaseHas('posts', ['id' => $content->post->id, 'views' => 0]);
+
+        $this->get("/post/{$content->post->title}");
+
+        $this->assertDatabaseHas('posts', ['id' => $content->post->id, 'views' => 1]);
     }
 }
