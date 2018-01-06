@@ -14,14 +14,14 @@ class PostController extends Controller
 
 	public function index()
 	{
-		$posts = Post::paginate(15);
+		$posts = Post::latest()->paginate(15);
 		return view('posts', compact('posts'));
 	}
 
     public function show(Post $post)
     {
         $post->increment('views');
-        $contents = $post->contents()->paginate(1);
+        $contents = $post->contents()->simplePaginate(1);
         return view('post', compact('post', 'contents'));
     }
 

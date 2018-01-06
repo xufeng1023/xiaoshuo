@@ -6,10 +6,10 @@
         <div class="col-12">
         	<table class="table table-striped">
 
-	            @foreach($posts as $post)
+	            @foreach($posts as $p)
 		            <tr>
 		            	<td>
-		                	<a href="/post/{{ $post->title }}">{{ $post->title }}</a>
+		                	<a href="/post/{{ $p->title }}">{{ $p->title }}</a>
 		                </td>
 	                </tr>
 	            @endforeach

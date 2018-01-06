@@ -7,7 +7,7 @@
         	<div class="card border-light">
 	        	<h1 class="h3 font-weight-bold">{{ $post->title }}</h1>
 	        	<p>{!! nl2br($contents->first()->content) !!}</p>
-	        	{!! $contents->links('vendor.pagination.bootstrap-4') !!}
+	        	{!! $contents->links('vendor.pagination.simple-bootstrap-4') !!}
         	</div>
         </div>
     </div>

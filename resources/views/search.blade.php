@@ -9,7 +9,7 @@
             		<ul class="list-group list-group-flush mb-4">
             			@foreach($contents as $content)
     					    <li class="list-group-item">			  
-    				        	<a href="/post/{{ $content->post->title }}">
+    				        	<a href="/post/{{ $content->post->title }}?page={{ $content->id }}">
                                     <h6 class="h4">{{ $content->post->title }}</h6>
                                 </a>
     				        	<p>{!! $content->searchedText(request()->q) !!}...</p>
