@@ -17,9 +17,16 @@ class ExampleTest extends TestCase
         $this->get('/upload');
     }
 
-    public function test_auth_can_see_upload_page()
+    public function test_users_cannot_see_upload_page()
     {
-    	$this->auth();
+        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+        $this->auth();
+        $this->get('/upload');
+    }
+
+    public function test_admin_can_see_upload_page()
+    {
+    	$this->admin();
     	$this->get('/upload')->assertStatus(200);
     }
 
@@ -35,10 +42,17 @@ class ExampleTest extends TestCase
     	$this->post('/upload');
     }
 
+    public function test_users_cannot_post()
+    {
+        $this->expectException('Symfony\Component\HttpKernel\Exception\NotFoundHttpException');
+        $this->auth();
+        $this->post('/upload');
+    }
+
     public function test_auth_can_post()
     {
         Storage::fake();
-    	$this->auth();
+    	$this->admin();
 
         $post = $this->article([], 'raw');
         $post['content'] = UploadedFile::fake()->create('text.txt', 100);
@@ -78,5 +92,5 @@ class ExampleTest extends TestCase
         $this->get("/post/{$content->post->title}");
 
         $this->assertDatabaseHas('posts', ['id' => $content->post->id, 'views' => 1]);
-    }
+    } 
 }

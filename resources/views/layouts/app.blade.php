@@ -19,11 +19,13 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    @auth
+                    @admin
                         <li class="nav-item">
                             <a class="nav-link" href="/upload">Upload</a>
                         </li>
-                    
+                    @endadmin
+
+                    @auth    
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
@@ -35,6 +37,12 @@
                             </form>
                         </li>
                     @endauth
+                    
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                    @endguest
                 </ul>
                 <form class="form-inline my-2 my-lg-0" action="/search" method="get">
                     <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

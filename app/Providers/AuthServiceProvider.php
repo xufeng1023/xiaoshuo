@@ -25,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('delete-bookmark', function ($user, $bookmark) {
+            return $user->id == $bookmark->user_id;
+        });
     }
 }

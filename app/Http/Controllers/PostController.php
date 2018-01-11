@@ -9,7 +9,7 @@ class PostController extends Controller
 {
 	public function __construct()
 	{
-		$this->middleware('auth')->only(['new', 'upload']);
+		$this->middleware(['auth', 'admin'])->only(['new', 'upload']);
 	}
 
 	public function index()
