@@ -1,16 +1,16 @@
 try {
-	window.Popper = require('popper.js/dist/umd/popper');
-    window.$ = window.jQuery = require('jquery/dist/jquery.slim');
+    window.$ = window.jQuery = require('jquery/dist/jquery');
+    window.Popper = require('popper.js/dist/umd/popper');
 
     require('bootstrap');
 } catch (e) {}
 
 jQuery(function($) {
-	$('.modal').modal();
+	$('#successModal').modal();
 
-	$('.modal').on('shown.bs.modal', function (e) {
+	$('#successModal').on('shown.bs.modal', function (e) {
 		setTimeout(function() {
 			$(this).modal('hide');
-		}.bind($(this)), 1000);
+		}.bind($(this)), 2000);
 	})
 });

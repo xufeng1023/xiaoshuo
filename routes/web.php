@@ -8,4 +8,6 @@ Route::get('/upload', 'PostController@new');
 Route::post('/upload', 'PostController@upload');
 Route::get('/search', 'PostController@search');
 Route::post('/bookmark', 'BookmarkController@store');
+Route::post('/loginBookmark', 'BookmarkController@loginStore');
+Route::post('/registerBookmark', 'BookmarkController@registerStore');
 Route::delete('/bookmark/{bookmark}', 'BookmarkController@delete');

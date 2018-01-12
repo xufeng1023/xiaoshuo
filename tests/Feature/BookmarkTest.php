@@ -16,6 +16,32 @@ class BookmarkTest extends TestCase
         $this->post('/bookmark');
     }
 
+    public function test_users_can_login_and_bookmark_together()
+    {
+        $password = '123123';
+        $user = factory(\App\User::class)->create(['password' => bcrypt($password)]);
+
+        $bookmark['post_id'] = 1;
+        $bookmark['content_id'] = 1;
+
+        $data = array_merge($user->toArray(), $bookmark); // user array dont include password
+        $data['password'] = $password;
+
+        $this->post('/loginBookmark', $data);
+        $this->assertDatabaseHas('bookmarks', $bookmark);
+    }
+
+    public function test_users_can_register_and_bookmark_together()
+    {
+        $userInfo = ['email' => 'test@email.com', 'password' => '123123', 'password_confirmation' => '123123'];
+        $bookmark = ['post_id' => 1, 'content_id' => 1];
+
+        $data = array_merge($userInfo, $bookmark);
+
+        $this->post('/registerBookmark', $data);
+        $this->assertDatabaseHas('bookmarks', $bookmark)->assertDatabaseHas('users', ['id' => 1, 'email' => 'test@email.com']);
+    }
+
     public function test_users_can_add_bookmarks()
     {
         $this->auth();
