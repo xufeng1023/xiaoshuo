@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-        	<div class="card border-light">
+        	<div class="card p-3">
 	        	<h1 class="h3 font-weight-bold">{{ $post->title }}</h1>
 	        	<div>
 	        		@auth

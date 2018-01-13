@@ -17,6 +17,8 @@ class Content extends Model
 
 	public function searchedText($text, $return = '')
 	{
+		if(!$text) return;
+		
 		$keywords = explode(' ', $text);
 		
 		foreach($keywords as $w) {

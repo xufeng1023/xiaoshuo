@@ -9889,3 +9889,13 @@ a.text-dark:hover {
   }
 }
 
+body {
+  background-color: #f1f1f1;
+}
+
+@media (min-width: 48em) {
+  .container {
+    max-width: 46rem;
+  }
+}
+

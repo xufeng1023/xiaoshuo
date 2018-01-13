@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-        	<div class="card border-light">
+        	<div class="card p-3">
                 @if(count($contents))
             		<ul class="list-group list-group-flush mb-4">
             			@foreach($contents as $content)
