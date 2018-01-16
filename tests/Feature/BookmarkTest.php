@@ -75,4 +75,12 @@ class BookmarkTest extends TestCase
     	$this->delete("/bookmark/$not_my_bookmark->id");
     	$this->assertDatabaseHas('bookmarks', $not_my_bookmark->toArray());
     }
+
+    public function test_guests_can_not_see_bookmarks_page()
+    {
+        $this->expectException('Illuminate\Auth\AuthenticationException');
+        $this->get('/dashboard');
+    }
+
+    
 }

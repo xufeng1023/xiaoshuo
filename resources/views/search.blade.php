@@ -18,7 +18,10 @@
     	        	</ul>
     	        	{!! $contents->appends(['q' => request()->q])->links('vendor.pagination.bootstrap-4') !!}
                 @else
-                    没有找到任何包含“{{ request()->q }}”的小说
+                    <p>
+                        @lang('index.no results', ['keyword' => request('q')])
+                    </p>
+                    <a href="/">@lang('index.back to homepage')</a>
                 @endif
         	</div>
         </div>

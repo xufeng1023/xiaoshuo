@@ -8,7 +8,7 @@
         @endif
 
         <li class="page-item d-flex align-items-center">
-            <span>{{ $paginator->currentPage() }}</span>
+            <span>@lang('pagination.pages', ['page' => $paginator->currentPage()])</span>
         </li>
 
         {{-- Next Page Link --}}

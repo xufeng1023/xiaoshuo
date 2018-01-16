@@ -1,0 +1,24 @@
+<?php
+
+return [
+
+    'app name' => '爱小说',
+    'bookmark' => '插入书签',
+    'bookmarked' => '书签已插入!',
+    'my bookmarks' => '我的书签',
+    'upload' => '上传',
+    'logout' => '退出',
+    'login' => '登入',
+    'register' => '注册',
+    'email' => '邮箱',
+    'password' => '密码',
+    'password again' => '再次输入密码',
+    'forgot password' => '找回密码',
+    'reset password' => '重置密码',
+    'send reset password link' => '发送密码重置链接到邮箱',
+    'search' => '搜索',
+    'search content' => '直接搜索小说内容...',
+    'no results' => '没有找到任何包含“:keyword”的小说',
+    'back to homepage' => '回到首页',
+
+];

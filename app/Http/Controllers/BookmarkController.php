@@ -17,6 +17,11 @@ class BookmarkController extends RegisterController
 		$this->middleware('auth')->except(['loginStore', 'registerStore']);
 	}
 
+    public function dashboard()
+    {
+        return view('dashboard');
+    }
+
     public function store(Request $request)
     {
     	Bookmark::updateOrCreate(
@@ -29,21 +34,21 @@ class BookmarkController extends RegisterController
     		]
     	);
 
-    	return back()->with('success', 'bookmarked successful.');
+    	return back()->with('success', trans('index.bookmarked'));
     }
 
     public function loginStore(Request $request)
     {
         $this->login($request)->store($request);
 
-        return back()->with('success', 'bookmarked successful.');
+        return back()->with('success', trans('index.bookmarked'));
     }
 
     public function registerStore(Request $request)
     {
         $this->register($request)->store($request);
 
-        return back()->with('success', 'bookmarked successful.');
+        return back()->with('success', trans('index.bookmarked'));
     }
 
     protected function authenticated()
