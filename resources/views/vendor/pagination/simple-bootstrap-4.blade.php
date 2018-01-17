@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <ul class="pagination justify-content-between">
+    <ul class="pagination pagination-sm justify-content-between">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <li class="page-item disabled"><span class="page-link rounded-right">@lang('pagination.previous')</span></li>
@@ -8,7 +8,17 @@
         @endif
 
         <li class="page-item d-flex align-items-center">
-            <span>@lang('pagination.pages', ['page' => $paginator->currentPage()])</span>
+            <form method="get" action="{{ url()->current() }}">
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">@lang('pagination.pages', ['page' => $paginator->currentPage()])</div>
+                    </div>
+                    <input type="number" class="form-control w-6rem" name="page" placeholder="{{ __('index.jump to') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-success" type="submit">@lang('index.confirm')</button>
+                    </div>
+                </div>
+            </form>
         </li>
 
         {{-- Next Page Link --}}

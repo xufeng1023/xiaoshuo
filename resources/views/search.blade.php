@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+<title>{{ request('q') }}-{{ __('index.app name') }}</title>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">

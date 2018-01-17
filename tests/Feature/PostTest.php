@@ -71,6 +71,15 @@ class ExampleTest extends TestCase
             ->assertSee('hello123');
     }
 
+    public function test_show_no_page_feedback_when_pagination_not_exist()
+    {
+        $content = $this->content(['content' => 'hello123']);
+
+        $this->get("/post/{$content->post->title}?page=999")
+            ->assertSee($content->post->title)
+            ->assertSee(trans('index.no page'));
+    }
+
     public function test_guests_can_search()
     {
         $content1 = $this->content(['content' => 'hello123']);
@@ -81,9 +90,17 @@ class ExampleTest extends TestCase
 
         $this->get("/search?q=456")
             ->assertDontSee($content1->post->title)->assertSee($content2->post->title);
+
+        $this->get("/search?q=789")
+            ->assertDontSee($content1->post->title)->assertDontSee($content2->post->title)
+            ->assertSee(trans('index.no results', ['keyword' => '789']));
+
+        $this->get("/search?q=hello&page=999")
+            ->assertDontSee($content1->post->title)->assertDontSee($content2->post->title)
+            ->assertSee(trans('index.no results', ['keyword' => 'hello']));
     }
 
-    public function test_reading_posts_adds_views()
+    public function test_reading_posts_adds_one_post_view()
     {
         $content = $this->content(['content' => 'hello123']);
 

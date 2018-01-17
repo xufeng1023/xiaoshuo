@@ -17,6 +17,7 @@ class CreateContentTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('post_id');
             $table->text('content');
+            $table->timestamps();
         });
     }
 

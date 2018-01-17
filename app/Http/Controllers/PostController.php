@@ -21,7 +21,9 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $post->increment('views');
-        $contents = $post->contents()->simplePaginate(1);
+
+        $contents = $post->contents()->paginate(1);
+
         return view('post', compact('post', 'contents'));
     }
 
@@ -47,7 +49,7 @@ class PostController extends Controller
 
     	foreach($episodes as $episode) {
     		$post->contents()->create([
-                'content' => $episode
+                'content' => trim($episode, "\r\n\r\n")
             ]);
     	}
 

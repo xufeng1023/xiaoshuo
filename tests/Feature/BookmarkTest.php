@@ -63,7 +63,7 @@ class BookmarkTest extends TestCase
     	$this->assertDatabaseHas('bookmarks', $data2)->assertDatabaseMissing('bookmarks', $data);
     }
 
-    public function test_users_can_only_delete_his_own_bookmarks()
+    public function test_users_can_only_delete_their_own_bookmarks()
     {
     	$this->auth();
     	$my_bookmark = $this->bookmark(['user_id' => auth()->id()]);
@@ -82,5 +82,21 @@ class BookmarkTest extends TestCase
         $this->get('/dashboard');
     }
 
-    
+    public function test_users_can_see_their_own_bookmarks_on_dashboard()
+    {
+        $this->auth();
+        $my_bookmark = $this->bookmark(['user_id' => auth()->id()]);
+        $not_my_bookmark = $this->bookmark(['user_id' => auth()->id() * 2]);
+
+        $this->get('/dashboard')
+            ->assertSee($my_bookmark->post->title)
+            ->assertDontSee($not_my_bookmark->post->title);
+    }
+
+    public function test_users_can_see_feedbacks_if_no_bookmarks_on_dashboard_yet()
+    {
+        $this->auth();
+
+        $this->get('/dashboard')->assertSee(trans('index.no bookmarks'));
+    }
 }

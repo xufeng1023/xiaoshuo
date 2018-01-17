@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('meta')
+<meta name="robots" content="noindex" />
+@endsection
+
+@section('title')
+<title>{{ __('index.upload') }}-{{ __('index.app name') }}</title>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

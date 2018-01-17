@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+<title>{{ __('index.forgot password') }}-{{ __('index.app name') }}</title>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

@@ -19,7 +19,8 @@ class BookmarkController extends RegisterController
 
     public function dashboard()
     {
-        return view('dashboard');
+        $bookmarks = auth()->user()->bookmarks()->latest()->get();
+        return view('dashboard', compact('bookmarks'));
     }
 
     public function store(Request $request)
