@@ -11,7 +11,7 @@
     @yield('style')
 </head>
 <body>
-    <div class="container">
+    <header class="container">
         <nav class="navbar navbar-light navbar-expand justify-content-between">
             <a class="navbar-brand" href="/">@lang('index.app name')</a>
 
@@ -60,10 +60,16 @@
                 </div>
             </div>
         </form>
-    </div>
+    </header>
     
-    @yield('content')
-
+    <main class="container">
+        @yield('content')
+    </main>
+    
+    <footer class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+    </footer>
+    
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('js')
 </body>

@@ -18,6 +18,8 @@ class CreateContentTable extends Migration
             $table->unsignedInteger('post_id');
             $table->text('content');
             $table->timestamps();
+
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }
 

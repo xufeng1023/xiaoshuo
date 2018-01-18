@@ -17,4 +17,9 @@ class Post extends Model
     {
     	return $this->hasMany(Content::class);
     }
+
+    public function getUploadDateAttribute()
+    {
+    	return $this->created_at->format('Y-m-d');
+    }
 }

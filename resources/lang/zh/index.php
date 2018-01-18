@@ -26,5 +26,7 @@ return [
     'jump to' => '跳到页数',
     'confirm' => '确认',
     'posts' => '小说列表',
+    'author' => '作者::author',
+    'upload date' => '转载于:date',
 
 ];
