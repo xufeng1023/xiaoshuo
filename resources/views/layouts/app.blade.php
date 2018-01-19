@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @yield('meta')
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon">
     @yield('title')
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110529389-1"></script>
     <script>
@@ -20,8 +21,10 @@
 </head>
 <body>
     <header class="container">
-        <nav class="navbar navbar-light navbar-expand justify-content-between">
-            <a class="navbar-brand" href="/">@lang('index.app name')</a>
+        <nav class="navbar navbar-light navbar-expand justify-content-between px-0">
+            <a class="navbar-brand p-0" href="/">
+                <img src="{{ asset('images/logo.png') }}" alt="logo" width="45">
+            </a>
 
             <ul class="navbar-nav">
                 @admin
@@ -58,6 +61,7 @@
         @if(url()->current() !== url('upload'))
             <!-- <div class="jumbotron"></div> -->
         @endif
+        <hr class="mt-0">
         <form class="form-inline mb-4 d-flex justify-content-center" action="/search" method="get">
             <div class="input-group w-75">
                 <input name="q" class="form-control" type="search" placeholder="{{ __('index.search content') }}" aria-label="Search" value="{{ request('q') ?: '' }}">
