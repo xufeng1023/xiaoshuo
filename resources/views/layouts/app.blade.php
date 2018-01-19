@@ -48,9 +48,7 @@
             </ul>
         </nav>
         @if(url()->current() !== url('upload'))
-            <div class="jumbotron">
-                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            </div>
+            <!-- <div class="jumbotron"></div> -->
         @endif
         <form class="form-inline mb-4 d-flex justify-content-center" action="/search" method="get">
             <div class="input-group w-75">
