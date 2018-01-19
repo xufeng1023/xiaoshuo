@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-6">
+    <div class="col-12 col-sm-6">
         <div class="card p-3">
             <form method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}

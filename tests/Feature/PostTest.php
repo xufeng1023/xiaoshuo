@@ -62,6 +62,29 @@ class ExampleTest extends TestCase
         $this->assertDatabaseHas('contents', ['post_id' => 1]);
     }
 
+    public function test_post_title_must_be_unique()
+    {
+        $this->expectException('Illuminate\Validation\ValidationException');
+        Storage::fake();
+
+        $this->admin();
+        $post1 = $this->article();
+
+        $post2 = $this->article(['title' => $post1->title], 'raw');
+        $post2['content'] = UploadedFile::fake()->create('text.txt', 100);
+
+        $this->post('/upload', $post2);
+    }
+
+    public function test_post_content_is_required()
+    {
+        $this->expectException('Illuminate\Validation\ValidationException');
+
+        $this->admin();
+
+        $this->post('/upload', $this->article([], 'raw'));
+    }
+
     public function test_guests_can_read_a_post()
     {
         $content = $this->content(['content' => 'hello123']);

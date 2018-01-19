@@ -22,7 +22,7 @@ abstract class TestCase extends BaseTestCase
 
     public function article($data = [], $action = 'create')
     {
-    	return factory(\App\Post::class)->{$action}();
+    	return factory(\App\Post::class)->{$action}($data);
     }
 
     public function content($data = [], $action = 'create')

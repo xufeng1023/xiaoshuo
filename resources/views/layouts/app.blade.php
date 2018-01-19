@@ -66,8 +66,17 @@
         @yield('content')
     </main>
     
-    <footer class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
+    <footer class="container py-3">
+        <div class="row">
+            <div class="col">
+                <div class="small">
+                    <div class="text-muted">@lang('index.repost statement')</div>
+                    <div class="text-muted">&copy @lang('index.app name') {{ date('Y') }}</div>
+                </div>
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+        </div>
     </footer>
     
     <script src="{{ asset('js/app.js') }}"></script>

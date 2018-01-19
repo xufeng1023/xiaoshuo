@@ -34,18 +34,17 @@ class PostController extends Controller
 
     public function upload(Request $request)
     {
-        if(!$request->hasFile('content')) {
-            return back()->with('file', 'no file uploaded!');
-        }
+        $validatedData = $request->validate([
+            'title' => 'required|unique:posts,title',
+            'author' => 'nullable',
+            'content' => 'required|file'
+        ]);
+
+        $post = Post::create($validatedData);
 
         $episodes = (new \App\CutPage(
             file_get_contents($request->content)
         ))->cut_str();
-
-        $post = Post::create([
-            'title' => $request->title,
-            'author' => $request->author,
-        ]);
 
     	foreach($episodes as $episode) {
     		$post->contents()->create([
@@ -53,7 +52,7 @@ class PostController extends Controller
             ]);
     	}
 
-    	return back();
+    	return back()->withSuccess('file uploaded!');
     }
 
     public function search(Request $request)

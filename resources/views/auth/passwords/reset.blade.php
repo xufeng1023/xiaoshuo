@@ -9,50 +9,48 @@
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-6">
-            <div class="card">
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.request') }}">
-                        {{ csrf_field() }}
+<div class="row justify-content-center">
+    <div class="col-12 col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" action="{{ route('password.request') }}">
+                    {{ csrf_field() }}
 
-                        <input type="hidden" name="token" value="{{ $token }}">
+                    <input type="hidden" name="token" value="{{ $token }}">
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email">@lang('index.email')</label>
+                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <label for="email">@lang('index.email')</label>
 
-                                <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
+                            <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
 
-                                @if ($errors->has('email'))
-                                    <span class="text-danger">{{ $errors->first('email') }}</span>
-                                @endif
-                        </div>
+                            @if ($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif
+                    </div>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password">@lang('index.password')</label>
+                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <label for="password">@lang('index.password')</label>
 
-                                <input id="password" type="password" class="form-control" name="password" required>
+                            <input id="password" type="password" class="form-control" name="password" required>
 
-                                @if ($errors->has('password'))
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                @endif
-                        </div>
+                            @if ($errors->has('password'))
+                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                            @endif
+                    </div>
 
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm">@lang('index.password again')</label>
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                    <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                        <label for="password-confirm">@lang('index.password again')</label>
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
 
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
-                                @endif
-                        </div>
+                            @if ($errors->has('password_confirmation'))
+                                <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+                            @endif
+                    </div>
 
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">@lang('index.reset password')</button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">@lang('index.reset password')</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@
     <div class="col-12">
     	<div class="card p-3">
             @if(count($contents))
-        		<ul class="list-group list-group-flush">
+        		<ul class="list-group list-group-flush mb-3">
         			@foreach($contents as $content)
 					    <li class="list-group-item">			  
 				        	<a href="/post/{{ $content->post->title }}?page={{ $content->id }}">
