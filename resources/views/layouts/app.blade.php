@@ -53,7 +53,7 @@
             </div>
         @endif
         <form class="form-inline mb-4 d-flex justify-content-center" action="/search" method="get">
-            <div class="input-group">
+            <div class="input-group w-75">
                 <input name="q" class="form-control" type="search" placeholder="{{ __('index.search content') }}" aria-label="Search" value="{{ request('q') ?: '' }}">
                 <div class="input-group-append">
                     <button class="btn btn-outline-success" type="submit">@lang('index.search')</button>
@@ -74,8 +74,6 @@
                     <div class="text-muted">&copy @lang('index.app name') {{ date('Y') }}</div>
                 </div>
             </div>
-            <div class="col"></div>
-            <div class="col"></div>
         </div>
     </footer>
     

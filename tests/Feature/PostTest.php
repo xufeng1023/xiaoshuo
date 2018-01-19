@@ -87,16 +87,16 @@ class ExampleTest extends TestCase
 
     public function test_guests_can_read_a_post()
     {
-        $content = $this->content(['content' => 'hello123']);
+        $content = $this->content();
 
         $this->get("/post/{$content->post->title}")
             ->assertSee($content->post->title)
-            ->assertSee('hello123');
+            ->assertSee($content->content);
     }
 
     public function test_show_no_page_feedback_when_pagination_not_exist()
     {
-        $content = $this->content(['content' => 'hello123']);
+        $content = $this->content();
 
         $this->get("/post/{$content->post->title}?page=999")
             ->assertSee($content->post->title)
@@ -125,12 +125,10 @@ class ExampleTest extends TestCase
 
     public function test_reading_posts_adds_one_post_view()
     {
-        $content = $this->content(['content' => 'hello123']);
-
+        $content = $this->content();
         $this->assertDatabaseHas('posts', ['id' => $content->post->id, 'views' => 0]);
 
         $this->get("/post/{$content->post->title}");
-
         $this->assertDatabaseHas('posts', ['id' => $content->post->id, 'views' => 1]);
     } 
 }
