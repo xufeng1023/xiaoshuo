@@ -16,7 +16,7 @@
 			        		<form action="/bookmark" method="post">
 			        			{{ csrf_field() }}
 			        			<input type="hidden" name="post_id" value="{{ $post->id }}">
-			        			<input type="hidden" name="content_id" value="{{ $contents->first()->id }}">
+			        			<input type="hidden" name="content_id" value="{{ $contents->first()->page }}">
 			        			<button type="submit" class="btn btn-outline-secondary btn-sm">@lang('index.bookmark')</button>
 			        		</form>
 		        		@else
@@ -49,7 +49,7 @@
 													  	</div>
 													  	{{ csrf_field() }}
 									        			<input type="hidden" name="post_id" value="{{ $post->id }}">
-									        			<input type="hidden" name="content_id" value="{{ $contents->first()->id }}">
+									        			<input type="hidden" name="content_id" value="{{ $contents->first()->page }}">
 							    					</form>
 										  		</div>
 										  		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -71,7 +71,7 @@
 													  	</div>
 													  	{{ csrf_field() }}
 									        			<input type="hidden" name="post_id" value="{{ $post->id }}">
-									        			<input type="hidden" name="content_id" value="{{ $contents->first()->id }}">
+									        			<input type="hidden" name="content_id" value="{{ $contents->first()->page }}">
 							    					</form>
 										  		</div>
 											</div>
