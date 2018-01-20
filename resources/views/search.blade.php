@@ -13,11 +13,11 @@
         			@foreach($contents as $content)
                         @if($content instanceof App\Content)
     					    <li class="list-group-item">			  
-    				        	<a href="/post/{{ $content->post->title }}?page={{ $content->id }}">
+    				        	<a href="/post/{{ $content->post->title }}?page={{ $content->page }}">
                                     <h5 class="card-title">{{ $content->post->title }}</h5>
                                 </a>
                                 <h6 class="card-subtitle mb-2 text-muted">
-                                    {{ __('index.author', ['author' => $content->post->author]) }}
+                                    {{ __('index.the author', ['author' => $content->post->author]) }}
                                     {{ __('index.upload date', ['date' => $content->post->uploadDate]) }}
                                 </h6>
     				        	<p class="card-text">{!! $content->searchedText(request()->q) !!}...</p>
@@ -26,14 +26,13 @@
 
                         @if($content instanceof App\Post)
                             <li class="list-group-item">              
-                                <a href="/post/{{ $content->title }}?page={{ $content->contents->first->id }}">
+                                <a href="/post/{{ $content->title }}">
                                     <h5 class="card-title">{{ $content->title }}</h5>
                                 </a>
-                                <h6 class="card-subtitle mb-2 text-muted">
+                                <h6 class="card-subtitle mb-2 text-muted m-0">
                                     {{ __('index.the author', ['author' => $content->author]) }}
                                     {{ __('index.upload date', ['date' => $content->uploadDate]) }}
                                 </h6>
-                                <p class="card-text">{!! $content->contents->first->searchedText(request()->q) !!}...</p>
                             </li>
                         @endif
 		        	@endforeach

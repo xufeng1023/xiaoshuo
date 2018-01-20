@@ -63,7 +63,7 @@
         @endif
         <hr class="mt-0">
         <form class="mb-3 d-flex justify-content-center" action="/search" method="get">
-            <div class="input-group w-75">
+            <div class="input-group">
                 <select class="form-control" name="search_category">
                     <option {{ (request("search_category") == 'title')? 'selected="selected"' : '' }} value="title">@lang('index.search title')</option>
                     <option {{ (request("search_category") == 'content')? 'selected="selected"' : '' }} value="content">@lang('index.search content')</option>

@@ -46,8 +46,9 @@ class PostController extends Controller
             file_get_contents($request->content)
         ))->cut_str();
 
-    	foreach($episodes as $episode) {
+    	foreach($episodes as $key => $episode) {
     		$post->contents()->create([
+                'page' => ++$key, 
                 'content' => trim($episode, "\r\n\r\n")
             ]);
     	}
@@ -61,9 +62,11 @@ class PostController extends Controller
 
         if($request->search_category === 'content') {
 
+            $keywords = explode(' ', $request->q);
+
             $query = Content::where('content', 'LIKE', "%$request->q%");
 
-            foreach( explode(' ', $request->q) as $w ) {
+            foreach( $keywords as $w ) {
                 $query = $query->orWhere('content', 'LIKE', "%$w%");
             }
             
@@ -73,7 +76,6 @@ class PostController extends Controller
 
         else {
             $contents = Post::where($request->search_category,  'LIKE', "%$request->q%")->paginate(15);
-            $contents->load('contents')->first();
         }
 
         return view('search', compact('contents'));
