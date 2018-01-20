@@ -9,7 +9,10 @@
     <div class="col-12">
     	<div class="card p-3">
             @if(count($contents))
-        		<ul class="list-group list-group-flush mb-3">
+                <p>
+                    @lang('index.searching', ['keyword' => request('q'), 'category' => trans('index.'.request('search_category'))])
+                </p>
+        		<ul class="list-group list-group-flush">
         			@foreach($contents as $content)
                         @if($content instanceof App\Content)
     					    <li class="list-group-item">			  

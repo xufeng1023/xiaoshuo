@@ -58,7 +58,9 @@ class PostController extends Controller
 
     public function search(Request $request)
     {
-        
+        $request->validate([
+            'q' => 'required'
+        ]);
 
         if($request->search_category === 'content') {
 

@@ -70,7 +70,7 @@
                     <option {{ (request("search_category") == 'author')? 'selected="selected"' : '' }} value="author">@lang('index.search author')</option>
                 </select>
 
-                <input name="q" class="form-control" type="search" placeholder="{{ __('index.search keywords') }}" aria-label="Search" value="{{ request('q') ?: '' }}">
+                <input name="q" class="form-control" type="search" placeholder="{{ __('index.search keywords') }}" aria-label="Search" value="{{ request('q') ?: '' }}" required>
                 
                 <div class="input-group-append">
                     <button class="btn btn-outline-success" type="submit">@lang('index.search')</button>

@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <ul class="pagination flex-wrap m-0">
+    <ul class="pagination flex-wrap mt-3 mb-0">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <li class="page-item disabled"><span class="page-link">@lang('pagination.previous')</span></li>

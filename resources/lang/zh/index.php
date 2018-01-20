@@ -20,6 +20,7 @@ return [
     'send reset password link' => '发送密码重置链接到邮箱',
     'search' => '搜索',
     'search keywords' => '关键字...',
+    'searching' => '搜索包含“:keyword”的:category',
     'no results' => '没有找到任何包含“:keyword”的:category',
     'no page' => '此小说没有这一页.',
     'back to homepage' => '回到首页',

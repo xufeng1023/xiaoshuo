@@ -23,8 +23,8 @@ class Content extends Model
 			$strArrays = explode($w, $this->content);
 			if(count($strArrays) <= 1) continue;
 			
-			$before = mb_substr(trim($strArrays[0]), -100);			
-			$after = mb_substr(trim($strArrays[1]), 0, 100);
+			$before = mb_substr(trim($strArrays[0]), -80);			
+			$after = mb_substr(trim($strArrays[1]), 0, 80);
 
 			$return = $before.$w.$after;
 		}
