@@ -108,19 +108,33 @@ class ExampleTest extends TestCase
         $content1 = $this->content(['content' => 'hello123']);
         $content2 = $this->content(['content' => 'hello456']);
         
-        $this->get("/search?q=hello")
+        $this->get("/search?q=hello&search_category=content")
             ->assertSee($content1->post->title)->assertSee($content2->post->title);
 
-        $this->get("/search?q=456")
+        $this->get("/search?q=456&search_category=content")
             ->assertDontSee($content1->post->title)->assertSee($content2->post->title);
 
-        $this->get("/search?q=789")
+        $this->get("/search?q=789&search_category=content")
             ->assertDontSee($content1->post->title)->assertDontSee($content2->post->title)
-            ->assertSee(trans('index.no results', ['keyword' => '789']));
+            ->assertSee(trans('index.no results', ['keyword' => '789', 'category' => trans('index.content')]));
 
-        $this->get("/search?q=hello&page=999")
+        $this->get("/search?q=hello&page=999&search_category=content")
             ->assertDontSee($content1->post->title)->assertDontSee($content2->post->title)
-            ->assertSee(trans('index.no results', ['keyword' => 'hello']));
+            ->assertSee(trans('index.no results', ['keyword' => 'hello', 'category' => trans('index.content')]));
+    }
+
+    public function test_guests_can_search_by_title_or_author()
+    {
+        $post1 = $this->article();
+        $post2 = $this->article();
+
+        $this->get("/search?q={$post1->title}&search_category=title")
+            ->assertSee($post1->author)
+            ->assertDontSee($post2->author);
+
+        $this->get("/search?q={$post1->author}&search_category=author")
+            ->assertSee($post1->title)
+            ->assertDontSee($post2->title);
     }
 
     public function test_reading_posts_adds_one_post_view()

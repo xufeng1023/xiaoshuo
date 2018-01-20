@@ -62,9 +62,16 @@
             <!-- <div class="jumbotron"></div> -->
         @endif
         <hr class="mt-0">
-        <form class="form-inline mb-4 d-flex justify-content-center" action="/search" method="get">
+        <form class="mb-3 d-flex justify-content-center" action="/search" method="get">
             <div class="input-group w-75">
-                <input name="q" class="form-control" type="search" placeholder="{{ __('index.search content') }}" aria-label="Search" value="{{ request('q') ?: '' }}">
+                <select class="form-control" name="search_category">
+                    <option {{ (request("search_category") == 'title')? 'selected="selected"' : '' }} value="title">@lang('index.search title')</option>
+                    <option {{ (request("search_category") == 'content')? 'selected="selected"' : '' }} value="content">@lang('index.search content')</option>
+                    <option {{ (request("search_category") == 'author')? 'selected="selected"' : '' }} value="author">@lang('index.search author')</option>
+                </select>
+
+                <input name="q" class="form-control" type="search" placeholder="{{ __('index.search keywords') }}" aria-label="Search" value="{{ request('q') ?: '' }}">
+                
                 <div class="input-group-append">
                     <button class="btn btn-outline-success" type="submit">@lang('index.search')</button>
                 </div>

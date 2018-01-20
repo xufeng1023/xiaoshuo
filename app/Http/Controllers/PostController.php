@@ -57,17 +57,25 @@ class PostController extends Controller
 
     public function search(Request $request)
     {
-        $keywords = explode(' ', $request->q);
+        
 
-        $query = Content::where('content', 'LIKE', "%$request->q%");
-        
-        foreach($keywords as $w) {
-            $query = $query->orWhere('content', 'LIKE', "%$w%");
+        if($request->search_category === 'content') {
+
+            $query = Content::where('content', 'LIKE', "%$request->q%");
+
+            foreach( explode(' ', $request->q) as $w ) {
+                $query = $query->orWhere('content', 'LIKE', "%$w%");
+            }
+            
+            $contents = $query->paginate(15);
+            $contents->load('post');
         }
-        
-        $contents = $query->paginate(15);
-        
-        $contents->load('post');
+
+        else {
+            $contents = Post::where($request->search_category,  'LIKE', "%$request->q%")->paginate(15);
+            $contents->load('contents')->first();
+        }
+
         return view('search', compact('contents'));
     }
 }
